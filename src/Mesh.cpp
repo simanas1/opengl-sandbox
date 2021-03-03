@@ -41,7 +41,7 @@ Mesh::Mesh(const char* filepath)
                 polygonIndices++;
                 std::stringstream facesStream(faces);
                 std::string face;
-                int faceCount{ 0 };
+                unsigned int faceCount{ 0 };
                 while (std::getline(facesStream, face, '/'))
                 {
                     faceCount++;
