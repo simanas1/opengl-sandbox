@@ -50,6 +50,7 @@ Mesh::Mesh(const char* filepath)
                             indices.push_back(std::stoi(face)-1);
                             indicesCount++;
                             break;
+                        //TODO: other faces for textures and normals
                         }
                     }
                 }
