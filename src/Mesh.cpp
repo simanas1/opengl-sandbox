@@ -21,6 +21,7 @@ Mesh::Mesh(const char* filepath)
     {
         std::string type;
         std::string faces;
+        
         std::istringstream in(line);
         in >> type;
 
@@ -34,15 +35,18 @@ Mesh::Mesh(const char* filepath)
 
         if (type == "f")
         {
+            unsigned int polygonIndices{0};
             while (in >> faces)
             {
+                polygonIndices++;
                 std::stringstream facesStream(faces);
                 std::string face;
                 int faceCount{ 0 };
                 while (std::getline(facesStream, face, '/'))
                 {
                     faceCount++;
-                    if (face != "")
+                    //TODO: what to do with quadrilaterals?
+                    if (face != "" && polygonIndices < 4)
                     {
                         switch (faceCount)
                         {
