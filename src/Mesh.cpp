@@ -20,7 +20,7 @@ Mesh::Mesh(const char* filepath)
     while (std::getline(inFile, line))
     {
         std::string type;
-        int index;
+        std::string faces;
         std::istringstream in(line);
         in >> type;
 
@@ -34,12 +34,27 @@ Mesh::Mesh(const char* filepath)
 
         if (type == "f")
         {
-            while (in >> index) {
-                indices.push_back(index-1);
-                indicesCount++;
+            while (in >> faces)
+            {
+                std::stringstream facesStream(faces);
+                std::string face;
+                int faceCount{ 0 };
+                while (std::getline(facesStream, face, '/'))
+                {
+                    faceCount++;
+                    if (face != "")
+                    {
+                        switch (faceCount)
+                        {
+                        case 1:
+                            indices.push_back(std::stoi(face)-1);
+                            indicesCount++;
+                            break;
+                        }
+                    }
+                }
             }
         }
-
     }
 }
 
